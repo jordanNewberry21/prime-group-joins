@@ -37,6 +37,12 @@ JOIN products AS p ON p.id = wp.product_id
 WHERE description = 'diet pepsi';
 
 ## Stretch
-9. How much was the total cost for each order?
-10. How much has each customer spent in total?
-11. How much has each customer spent in total? Customers who have spent $0 should still show up in the table. It should say 0, not NULL (research coalesce).
+-- 9. How much was the total cost for each order?
+SELECT o.id, quantity, SUM(unit_price) FROM products AS p
+JOIN line_items AS li ON p.id = li.product_id
+JOIN orders AS o ON li.order_id = o.id
+GROUP BY o.id;
+-- I got this far... it's adding the unit_price, but I'm pretty sure the math is off.
+
+-- 10. How much has each customer spent in total?
+-- 11. How much has each customer spent in total? Customers who have spent $0 should still show up in the table. It should say 0, not NULL (research coalesce).
